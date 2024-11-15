@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import {FaSpinner} from "react-icons/fa"
 
-export default function page() {
+export default function DetailedAll() {
   let { title, query, language, domains } = useParams()
   title = decodeURIComponent(title)
   const [specific, setSpecific] = useState()
