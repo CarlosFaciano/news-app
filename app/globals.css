@@ -2,20 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Estilo para el track (fondo) de la barra de desplazamiento */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* Estilo para el thumb (la parte que se mueve) */
+::-webkit-scrollbar-thumb {
+  background: #075985;
+  border-radius: 10px;
 }
+
+/* Estilo para el thumb al pasar el ratón */
+::-webkit-scrollbar-thumb:hover {
+  background: #033652;
+}
+
