@@ -59,7 +59,7 @@ export default function Home() {
   if (everything === "") {
     return (
       <div className="h-screen w-screen items-center justify-center">
-        <h2 className="text-6xl text-white">There's no results for that search or there was an error fetching data</h2>
+        <h2 className="text-6xl text-white">There&apos;s no results for that search or there was an error fetching data</h2>
       </div>
     )
   }
@@ -104,7 +104,7 @@ export default function Home() {
             key={data.id}
             handleLinkClick={handleLinkClick}
             author={data.author? data?.author : "Unknown"}
-            description={data?.description? data.description : "Theres no description"}
+            description={data?.description? data.description : "There&apos;s no description"}
             title={data?.title? data?.title : "This notice doesn&apos;t have a title"}
             image={data?.urlToImage ? data?.urlToImage : "/INVERTIR-EN-TECNOLOGIA.png"} />
 
