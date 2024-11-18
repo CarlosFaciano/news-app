@@ -4,18 +4,18 @@ import React, { createContext, useEffect, useState } from 'react';
 
 
 
-const MyContext = createContext();
+const sourcesContext = createContext();
 
-export const MyProvider = ({ children }) => {
+export const MyProviderSources = ({ children }) => {
 
-    const [urls, setUrls] = useState()
+    const [sources, setSources] = useState()
 
     const urlDomain = `https://newsapi.org/v2/top-headlines/sources?apiKey=716cffddaf1946a199d81f0d5147b014`
 
     useEffect(() => {
         try {
             fetchDomains(urlDomain)
-                .then((el)=> el && setUrls(el))
+                .then((el)=> el && setSources(el))
         } catch (error) {
             console.log(error.message)
         }
@@ -24,10 +24,10 @@ export const MyProvider = ({ children }) => {
     }, [])
 
     return (
-        <MyContext.Provider value={{ urls, setUrls }}>
+        <sourcesContext.Provider value={{ sources, setSources }}>
             {children}
-        </MyContext.Provider>
+        </sourcesContext.Provider>
     );
 };
 
-export default MyContext
+export default sourcesContext

@@ -10,7 +10,8 @@
 /* Estilo para el track (fondo) de la barra de desplazamiento */
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
-  border-radius: 10px;
+  border-radius: 4px;
+  
 }
 
 /* Estilo para el thumb (la parte que se mueve) */

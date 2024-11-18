@@ -2,8 +2,6 @@
 import MainNew from "@/components/MainNew";
 import NavBar from "@/components/NavBar";
 import fetchData from "@/utils/fetchData";
-import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaSpinner } from "react-icons/fa"
 
@@ -14,13 +12,13 @@ export default function Everything() {
   const [pageSize, setPageSize] = useState(10)
   const [page, setPage] = useState(1)
   const [domains, setDomains] = useState("")
-  
+
 
   const url = `https://newsapi.org/v2/everything?q=${query}&language=${language}&pageSize=${pageSize}&page=${page}&domains=${domains}&apiKey=716cffddaf1946a199d81f0d5147b014`
-  
+
 
   const handleLinkClick = (articleTitle) => {
-    // Redirigir a la ruta correspondiente dinámicamente
+
     if (domains !== "") {
       window.location.href = `/Everything/detailedall/${query}/${encodeURIComponent(articleTitle)}/${language}/${domains}`;
     }
@@ -28,7 +26,7 @@ export default function Everything() {
       window.location.href = `/Everything/withoutdomain/${query}/${encodeURIComponent(articleTitle)}/${language}`;
     }
   };
-  
+
   useEffect(() => {
     try {
       fetchData(url)
@@ -40,7 +38,7 @@ export default function Everything() {
 
   }, [query, language, page, pageSize, domains])
 
-  
+
 
 
 
@@ -63,7 +61,7 @@ export default function Everything() {
       <NavBar setDomains={setDomains} setQuery={setQuery} setLanguage={setLanguage} />
       <div className="flex items-center justify-around">
 
-        <h1 className="text-white text-6xl font-bold  my-5 ">{query}</h1>
+        <h1 className="text-white text-4xl md:text-6xl font-bold  my-5 ">{query}</h1>
 
       </div>
       <div className="flex items-center justify-evenly gap-x-1 mb-5 w-full md:w-[91%]">
@@ -105,16 +103,18 @@ export default function Everything() {
 
       </div>
 
-      {everything ? everything.articles.map((data, index) =>
+      {totalPosts > 0 ? everything.articles.map((data, index) =>
         <MainNew
-          key={data.id? data?.id : data?.title}
+          key={data.id ? data?.id : data?.title}
           handleLinkClick={handleLinkClick}
-          author={data?.author ? data.author : "Unknown"}
-          description={data?.description? data.description : "Without description"}
-          title={data?.title ? data?.title : "No title"}
+          author={data?.author ? data.author : "Unknown"} a
+          description={data?.description !== "[Removed]" ? data.description : "Without description"}
+          title={data?.title !== "[Removed]" ? data?.title : "No title"}
           image={data?.urlToImage ? data?.urlToImage : "/INVERTIR-EN-TECNOLOGIA.png"}
         />
-      ) : ""}
+      ) : <div className="h-screen w-3/4 mx-auto justify-center items-center text-4xl font-bold text-white mt-5">
+        <h2 className="text-center">We are sorry, there&apos;s no results for your search, please search for another topic, change the domain or reload the page</h2>
+      </div>}
 
 
     </div>
