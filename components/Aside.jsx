@@ -1,5 +1,5 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import ArrowRight from './icons/ArrowRight'
 import ArrowDown from './icons/ArrowDown'
 import Link from 'next/link'
@@ -7,13 +7,24 @@ import MyContext from '@/context/myContext'
 import { usePathname } from 'next/navigation'
 import sourcesContext from '@/context/sourcesContext'
 
-export default function Aside({aside, setAside, setDomains, setHeadlines}) {
+export default function Aside({aside, setAside, setDomains, setHeadlines, setLanguage}) {
     const {sources, setSources} = useContext(sourcesContext)
     const {urls, setUrls} = useContext(MyContext)
     const [dropdown, setDropdown] = useState(false)
     const [dropdown2, setDropdown2] = useState(false)
+    const [dropdown3, setDropdown3] = useState(false)
     const pathName = usePathname()
     
+    const inputRef = useRef(null);
+
+    const handleSearch = () => {
+        const domainValue = inputRef.current.value;
+        setDomains(domainValue)
+
+
+
+        inputRef.current.value = '';
+    };
 
    
    
@@ -31,7 +42,7 @@ export default function Aside({aside, setAside, setDomains, setHeadlines}) {
                 <li className=''>
                     <h2 onClick={() =>setDropdown(!dropdown) && setDropdown2(false)} className='transition duration-150 flex gap-x-1 items-center font-medium cursor-pointer'><span className=''>{dropdown === false ? <ArrowRight /> : <ArrowDown />}</span>Language</h2>
                     <ul className={`ms-9 ${dropdown === true ? "flex flex-col" : "hidden"}  `}>
-                        <li >
+                        <li onClick={(e) =>e.target.tagName === "OPTION" && setLanguage(e.target.value)}>
                             <option className='transition duration-150 font-medium cursor-pointer hover:ease-in-out hover:bg-white hover:text-black rounded-xl w-36 px-2' value="en">English</option>
                             <option className='transition duration-150 font-medium cursor-pointer hover:ease-in-out hover:bg-white hover:text-black rounded-xl w-36 px-2' value="fr">French</option>
                             <option className='transition duration-150 font-medium cursor-pointer hover:ease-in-out hover:bg-white hover:text-black rounded-xl w-36 px-2' value="es">Spanish</option>
@@ -72,6 +83,15 @@ export default function Aside({aside, setAside, setDomains, setHeadlines}) {
 
                     </ul>
                 </li>}
+                <li>
+                <h2 onClick={()=>setDropdown3(!dropdown3)} className='transition duration-150 flex gap-x-1 items-center font-medium cursor-pointer'><span className=''>{dropdown2 === false ? <ArrowRight /> : <ArrowDown />}</span>Search Source</h2>
+                    <ul  className={`z-50 px-2 ms-4 ${dropdown3 === true ? "flex flex-col items-center" : "hidden"}`}>
+                        <input ref={inputRef} className='w-full rounded-xl outline-none px-2 py-1 mt-5 me-2 text-black '>
+                             </input>
+                        <li onClick={handleSearch} className='w-1/2 bg-blue-500 flex justify-center items-center text-white font-bold rounded-xl py-1 mt-4'>Search</li>
+
+                    </ul>
+                </li>
                 <h2 className='text-white text-center font-bold text-2xl mt-5'>Pages</h2>
                 <Link className='ms-6' href="/Everything">
                         <li className='hover:text-lg hover:duration-150 hover:font-medium'>All the notices</li>

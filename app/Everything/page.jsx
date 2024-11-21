@@ -1,4 +1,5 @@
 "use client"
+import Magnifying from "@/components/icons/Magnifying";
 import MainNew from "@/components/MainNew";
 import NavBar from "@/components/NavBar";
 import fetchData from "@/utils/fetchData";
@@ -59,6 +60,11 @@ export default function Everything() {
   return (
     <div className="h-screen w-screen flex flex-col overflow-y-auto bg-slate-950 text-white overflow-x-hidden">
       <NavBar setDomains={setDomains} setQuery={setQuery} setLanguage={setLanguage} />
+      <div className='h-10  w-full justify-center flex md:hidden items-center rounded-xl  '>
+        <Magnifying className="text-black bg-white" />
+        <input placeholder='Busca por palabra o por frase especifica' onChange={(e) => e.target.value.length > 3 ? setQuery(e.target.value) : console.log("hello world")} id='dinamic' className='w-[70%] h-full  rounded-e-xl outline-none ps-2 py-2 text-black' type="text" />
+      </div>
+      <div className="flex items-center justify-around"></div>
       <div className="flex items-center justify-around">
 
         <h1 className="text-white text-4xl md:text-6xl font-bold  my-5 ">{query}</h1>
@@ -68,7 +74,7 @@ export default function Everything() {
 
         <div className="text-gray-500 text-2xl  items-center gap-x-2 hidden md:flex">
           <h2 className="">News per page</h2>
-          <select onClick={(e) => setPageSize(e.target.value)} className="bg-transparent" name="" id="">
+          <select onClick={(e) => setPageSize(e.target.value)} className="bg-transparent outline-none" name="" id="">
             <option value="10">10</option>
             <option value="15">15</option>
             <option value="20">20</option>
